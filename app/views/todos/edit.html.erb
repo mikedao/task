@@ -1,6 +1,7 @@
 <h1>EDIT THIS TO DO, BRO</h1>
 
-<%= form_for(@todo) do |f| %>
+  <%= form_for @todo, url: todo_path(@todo), :html => { :multipart => true } do |f| %>
+
   <%= f.label :title %>
   <%= f.text_field :title %>
 
@@ -12,5 +13,7 @@
   <%= f.hidden_field(:parent_id, value: params[:id]) %>
   <%= f.check_box :active %>
   <%= f.label(:active, "Active") %>
-  <%= f.submit "Edit this Todo"%>
+<%= f.label :avatar, "Upload PDF"%>
+      <%= f.file_field :avatar %>  <%= f.submit "Edit this Todo"%>
+
 <% end %>
