@@ -1,0 +1,52 @@
+<h1>OH MAN LIST DETAILS</h1>
+<p>
+<input type="button" value="Hide/Unhide" id="hide-button" />
+</p>
+<%= form_for(@todo) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :desc %>
+  <%= f.text_field :desc %>
+
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+  <%= f.hidden_field(:parent_id, value: params[:id]) %>
+  <%= f.hidden_field(:active, value: true) %>
+  <%= f.submit "Create A New Todo"%>
+<% end %>
+<ul>
+  <% @todos.each do |todo| %>
+    <li class="todo" style="<%= "display:none" if !todo.active %>" id="<%= "inactive" if !todo.active %>">
+    <%= todo.title %>
+    <%=todo.desc %>
+    <%= todo.active %>
+    <%= todo.due_date.strftime("%m/%d/%Y") %>
+    <%= link_to "Edit", edit_todo_path(todo) %>
+    <%= check_box :complete, todo.id, :id => todo.id, :class => "complete"%>
+
+    </li>
+
+  <%end%>
+
+
+<script charset="utf-8">
+$(document).ready(function() {
+
+function Show_Div() {
+  var inactive = $("#inactive");
+if (false == $("#inactive").is(':visible')) {
+    $("#inactive").show();
+  }
+  else {
+    $("#inactive").hide();
+  }
+}
+$(".complete").on('change', function () {
+  var id = parseInt($(this).attr("id"))
+  console.log(id)
+});
+
+$("#hide-button").on("click", Show_Div);
+});
+</script>

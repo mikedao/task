@@ -1,4 +1,5 @@
 class List < ActiveRecord::Base
+  has_many :todos
   after_create :make_active
 
   def self.active

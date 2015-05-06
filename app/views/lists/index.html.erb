@@ -9,6 +9,7 @@
   <% @active.each do |list| %>
     <p>
     <%= list.title %> <%= link_to("Edit", edit_list_path(list)) %>
+    <%= link_to "Details", list %>
     </p>
   <%end%>
 </div>

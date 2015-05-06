@@ -1,0 +1,16 @@
+<h1>EDIT THIS TO DO, BRO</h1>
+
+<%= form_for(@todo) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :desc %>
+  <%= f.text_field :desc %>
+
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+  <%= f.hidden_field(:parent_id, value: params[:id]) %>
+  <%= f.check_box :active %>
+  <%= f.label(:active, "Active") %>
+  <%= f.submit "Edit this Todo"%>
+<% end %>

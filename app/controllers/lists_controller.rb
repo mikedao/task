@@ -28,6 +28,11 @@ class ListsController < ApplicationController
     redirect_to lists_path
   end
 
+  def show
+    @todo = Todo.new
+    @todos = List.find(params[:id]).todos
+  end
+
   private
 
   def list_params
