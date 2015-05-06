@@ -7,6 +7,6 @@ class Api::TodosController < ApplicationController
 
   def create
     puts params["body"]
-    render :nothing => true, :status => 200, :content_type => 'text/html'
+    render :nothing => true, :status => 200
   end
 end
