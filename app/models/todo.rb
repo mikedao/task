@@ -1,5 +1,5 @@
 class Todo < ActiveRecord::Base
-  after_create :check_mail
+  before_create :check_mail
   after_update :send_update
   belongs_to :list
 
@@ -10,7 +10,6 @@ class Todo < ActiveRecord::Base
     array = self.title.split(' ')
     if array[-2] == "/cc"
       self.email = array[-1]
-      self.save
       puts "SENDING MAIL"
       Usermailer.new_task(self).deliver_now
     end
