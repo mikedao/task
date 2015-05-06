@@ -1,0 +1,41 @@
+<h1> LIST OF LISTS </h1>
+<p> <%= link_to("New List", new_list_path) %></p>
+<input type="button" value="Hide/Unhide" id="hide-button" />
+
+<div class="active-lists">
+  <p>
+  <b>Active Lists</b>
+  </p>
+  <% @active.each do |list| %>
+    <p>
+    <%= list.title %> <%= link_to("Edit", edit_list_path(list)) %>
+    </p>
+  <%end%>
+</div>
+
+<div id="inactive" style="display:none">
+  <p>
+  <b>Inactive Lists</b>
+  </p>
+  <% @inactive.each do |list| %>
+    <p>
+    <%= list.title %> <%= link_to("Edit", edit_list_path(list)) %> <%= link_to "delete", list, method: :delete, data: { confirm: "Are you sure?"} %>
+    </p>
+  <%end%>
+</div>
+
+<script charset="utf-8">
+$(document).ready(function() {
+
+function Show_Div() {
+  var inactive = $("#inactive");
+if (false == $("#inactive").is(':visible')) {
+    $("#inactive").show();
+  }
+  else {
+    $("#inactive").hide();
+  }
+}
+$("#hide-button").on("click", Show_Div);
+});
+</script>

@@ -1,0 +1,9 @@
+<h1>EDIT THIS SHIZ</h1>
+
+<%= form_for(@list) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.check_box :active %>
+  <%= f.label(:active, "Active") %>
+  <%= f.submit "Update"%>
+<% end %>
