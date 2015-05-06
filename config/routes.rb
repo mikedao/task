@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'photos/destroy'
-
+root to: "lists#index"
   namespace :api do
     resources :todos
   end
