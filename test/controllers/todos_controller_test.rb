@@ -20,4 +20,5 @@ class TodosControllerTest < ActionController::TestCase
     assert page.has_content?("EDIT")
   end
 
-end
+
+  end
