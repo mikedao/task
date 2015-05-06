@@ -6,28 +6,49 @@
   <p>
   <b>Active Lists</b>
   </p>
-  <% @active.each do |list| %>
-    <p>
-    <%= list.title %> <%= link_to("Edit", edit_list_path(list)) %>
-    <%= link_to "Details", list %>
-    </p>
+  <table id="myTable" class="tablesorter">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Active</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @active.each do |list| %>
+      <tr>
+        <td><%= list.title %></td>
+        <td><%= list.active %> </td>
+        <td><%= link_to("Edit", edit_list_path(list)) %>
+        <%= link_to "Details", list %></td>
+    </tr>
   <%end%>
 </div>
 
 <div id="inactive" style="display:none">
-  <p>
-  <b>Inactive Lists</b>
-  </p>
-  <% @inactive.each do |list| %>
-    <p>
-    <%= list.title %> <%= link_to("Edit", edit_list_path(list)) %> <%= link_to "delete", list, method: :delete, data: { confirm: "Are you sure?"} %>
-    </p>
+  <table id="myTable" class="tablesorter">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Active</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @inactive.each do |list| %>
+      <tr>
+        <td><%= list.title %></td>
+        <td><%= list.active %> </td>
+        <td><%= link_to("Edit", edit_list_path(list)) %>
+        <%= link_to "Details", list %></td>
+    </tr>
   <%end%>
+  </tbody>
+</table>
 </div>
-
 <script charset="utf-8">
 $(document).ready(function() {
-
+$(function(){
+  $("#myTable").tablesorter();
+});
 function Show_Div() {
   var inactive = $("#inactive");
 if (false == $("#inactive").is(':visible')) {
