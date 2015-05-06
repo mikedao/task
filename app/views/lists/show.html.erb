@@ -17,20 +17,20 @@
 <% end %>
 <ul>
   <% @todos.each do |todo| %>
-    <li class="todo" style="<%= "display:none" if !todo.active %>" id="<%= "inactive" if !todo.active %>">
-    <%= todo.title %>
-    <%=todo.desc %>
-    <%= todo.active %>
-    <%= todo.due_date.strftime("%m/%d/%Y") %>
-    <%= link_to "Edit", edit_todo_path(todo) %>
-    <%= check_box :complete, todo.id, :id => todo.id, :class => "complete"%>
-
-    </li>
-
+    <div id="todo-item">
+      <li class="todo" style="<%= "display:none" if !todo.active %>" id="<%= "inactive" if !todo.active %>">
+      <%= todo.title %>
+      <%=todo.desc %>
+      <%= todo.active %>
+      <%= todo.due_date.strftime("%m/%d/%Y") %>
+      <%= link_to "Edit", edit_todo_path(todo) %>
+      <%= check_box :complete, todo.id, :id => todo.id, :class => "complete"%>
+      </li>
+    </div>
   <%end%>
 
 
-<script charset="utf-8">
+  <script charset="utf-8">
 $(document).ready(function() {
 
 function Show_Div() {
@@ -44,14 +44,18 @@ if (false == $("#inactive").is(':visible')) {
 }
 $(".complete").on('change', function () {
   var id = parseInt($(this).attr("id"))
+  var todo = $(this).parent()
   $.ajax('/api/todos/' + id, {
     method: 'put',
     data: {
     active: false
+    },
+    success: function(response) {
+      todo.hide();
     }
-  });
+  })
 });
 
 $("#hide-button").on("click", Show_Div);
 });
-</script>
+  </script>
