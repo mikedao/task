@@ -44,7 +44,12 @@ if (false == $("#inactive").is(':visible')) {
 }
 $(".complete").on('change', function () {
   var id = parseInt($(this).attr("id"))
-  console.log(id)
+  $.ajax('/api/todos/' + id, {
+    method: 'put',
+    data: {
+    active: false
+    }
+  });
 });
 
 $("#hide-button").on("click", Show_Div);
