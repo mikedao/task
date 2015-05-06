@@ -14,7 +14,8 @@ gem "sdoc", "~> 0.4.0", group: :doc
 group :development, :test do
   gem "byebug"
   gem "simplecov", :require => false, :group => :test
-
+  gem "capybara"
+  gem "launchy"
   gem "awesome_print"
   gem "pry"
   gem "better_errors"
