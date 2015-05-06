@@ -1,7 +1,15 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+ config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['bucket'],
+    :access_key_id => ENV['access_key'],
+    :secret_access_key => ENV['secret_key'],
+    :region => "us-west-1"
+  }
 
-  # Code is not reloaded between requests.
+ }
+
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and

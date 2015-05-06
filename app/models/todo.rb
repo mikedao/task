@@ -2,6 +2,7 @@ class Todo < ActiveRecord::Base
   before_create :check_mail
   after_update :send_update
   belongs_to :list
+  has_one :photo
 
 
   private
