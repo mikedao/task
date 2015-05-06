@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  get 'photos/destroy'
 
+  root to: 'lists#index'
   namespace :api do
-    resources :todos
+    resources :todos, only: [:update]
   end
   resources :lists
-  resources :todos
+  resources :todos, only: [:craete, :edit, :update]
   resources :photos, only: [:destroy]
 end

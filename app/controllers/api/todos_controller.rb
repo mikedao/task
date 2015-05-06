@@ -5,8 +5,4 @@ class Api::TodosController < ApplicationController
     render nothing: true
   end
 
-  def create
-    puts params["body"]
-    render :nothing => true, :status => 200
-  end
 end
