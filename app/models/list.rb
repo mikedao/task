@@ -14,4 +14,5 @@ class List < ActiveRecord::Base
     self.active = true
     self.save
   end
+
 end

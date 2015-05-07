@@ -33,8 +33,9 @@ class ListsController < ApplicationController
   end
 
   def show
+    binding.pry
     @todo = Todo.new
-    @todos = List.find(params[:id]).todos
+    @todos = List.find(params[:id]).todos.where(active: true)
   end
 
   private
