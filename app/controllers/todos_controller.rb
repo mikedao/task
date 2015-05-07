@@ -9,8 +9,6 @@ class TodosController < ApplicationController
   end
 
   def update
-    binding.pry
-    puts params
     photo = Photo.create(todos_params.extract!("avatar"))
     todo = Todo.find(params[:todo][:id])
     todo.update(todos_update)
