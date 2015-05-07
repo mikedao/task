@@ -1,8 +1,5 @@
 <h1>OH MAN LIST DETAILS</h1>
 <%= link_to "Inactive", inactive_todos_path(params[:id]) %>
-<p>
-<input type="button" value="Hide/Unhide" id="hide-button" />
-</p>
 <%= form_for(@todo) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -20,7 +17,6 @@
   <table id="myTable" class="tablesorter">
     <thead>
       <tr>
-        <th></th>
         <th>Title</th>
         <th>Description</th>
         <th>Active</th>
@@ -33,23 +29,20 @@
     <% @todos.each do |todo| %>
       <div id="todo-item">
         <tr>
-          <td>
-          <li class="todo" style="<%= "display:none" if !todo.active %>" id="<%= "inactive" if !todo.active %>">
-          <%= check_box :complete, todo.id, :id => todo.id, :class => "complete"%>
-          </li>
-        </td>
         <td><%= todo.title %></td>
          <td> <%=todo.desc %></td>
-
          <td><%= todo.active %></td>
-
          <td><%= todo.due_date.strftime("%m/%d/%Y") %></td>
          <td><%= image_tag(todo.photo.avatar.url) if todo.photo %></td>
 
          <td><%= link_to "Edit", edit_todo_path(todo) %>
               <%= link_to("Delete Photo", photo_path(todo.photo), method: :delete) if todo.photo %>
          </td>
+          <td>
 
+          <%= button_to "Make Active", todo_path(:todo => {:id => todo.id.to_s, :active => false}),
+            method: :put, remote: true, form_class: "active_button"%>
+          </td>
         </tr>
       </div>
     <%end%>
@@ -60,29 +53,8 @@ $(document).ready(function() {
 $(function(){
   $("#myTable").tablesorter();
 });
-function Show_Div() {
-  var inactive = $("#inactive");
-if (false == $("#inactive").is(':visible')) {
-    $("#inactive").show();
-  }
-  else {
-    $("#inactive").hide();
-  }
-}
-$(".complete").on('change', function () {
-  var id = parseInt($(this).attr("id"))
-  var todo = $(this).parent()
-  $.ajax('/api/todos/' + id, {
-    method: 'put',
-    data: {
-    active: false
-    },
-    success: function(response) {
-      todo.hide();
-    }
-  })
 });
-
-$("#hide-button").on("click", Show_Div);
-});
+$('form.active_button').on('click', function (){
+  $(this).parent().parent().hide();
+  });
     </script>
