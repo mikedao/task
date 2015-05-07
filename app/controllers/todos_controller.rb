@@ -9,11 +9,16 @@ class TodosController < ApplicationController
   end
 
   def update
+    binding.pry
+    puts params
     photo = Photo.create(todos_params.extract!("avatar"))
-    todo = Todo.find(params[:id])
+    todo = Todo.find(params[:todo][:id])
     todo.update(todos_update)
     todo.photo = photo
-    redirect_to lists_path
+    respond_to do |format|
+      format.html { redirect_to lists_path }
+      format.js
+    end
   end
 
   private

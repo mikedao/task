@@ -33,10 +33,15 @@ class ListsController < ApplicationController
   end
 
   def show
-    binding.pry
     @todo = Todo.new
     @todos = List.find(params[:id]).todos.where(active: true)
   end
+
+  def inactive_todos
+    @todo = Todo.new
+    @todos = List.find(params[:id]).todos.where(active: false)
+  end
+
 
   private
 
