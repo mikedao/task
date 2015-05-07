@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'photos/destroy'
-
+  root to: "lists#index"
+  get '/hidden/', to: 'lists#hidden', as: 'hidden'
   namespace :api do
     resources :todos
   end
