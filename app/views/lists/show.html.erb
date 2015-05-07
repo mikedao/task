@@ -38,7 +38,7 @@
          </td>
           <td>
 
-          <%= button_to "Make Active", todo_path(:todo => {:id => todo.id.to_s, :active => false}),
+          <%= button_to "Make Inactive", todo_path(:todo => {:id => todo.id.to_s, :active => false}),
             method: :put, remote: true, form_class: "active_button"%>
           </td>
         </tr>
