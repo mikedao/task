@@ -43,7 +43,9 @@ class TodosControllerTest < ActionController::TestCase
      "desc"=>"steve was here",
      "due_date"=>"2015-05-04",
      "parent_id"=>"15",
-     "active"=>"1"},
+     "active"=>"1",
+     "id"=> todo.id.to_s
+    },
      "commit"=>"Edit this Todo",
      "controller"=>"todos",
      "action"=>"update",
