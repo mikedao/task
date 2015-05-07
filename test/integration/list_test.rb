@@ -121,6 +121,33 @@ class IndexPageTest < ActionDispatch::IntegrationTest
     assert_equal current_path, list_path(list)
   end
 
+  test "an active list has no delete" do
+    list = List.create(title: "Hello")
 
+    visit root_path
+    refute page.has_link?("Delete")
+  end
+
+  test "an inactive list has a delete link" do
+    list = List.create(title: "Hello")
+    list.active = false
+    list.save
+
+    visit hidden_path
+
+    assert page.has_link?("Delete")
+  end
+
+  test "an inactive list can be deleted" do
+    list = List.create(title: "Hello")
+    list.active = false
+    list.save
+
+    visit hidden_path
+    click_link_or_button "Delete"
+
+    visit hidden_path
+    refute page.has_content?("Hello")
+  end
 
 end
