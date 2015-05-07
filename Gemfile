@@ -22,6 +22,8 @@ group :development, :test do
   gem "better_errors"
   gem "web-console", "~> 2.0"
   gem "database_cleaner"
+  gem "selenium-webdriver"
+  gem "poltergeist"
 
   gem "spring"
 end
