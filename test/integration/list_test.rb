@@ -47,5 +47,80 @@ class IndexPageTest < ActionDispatch::IntegrationTest
     fill_in "list[title]", with: "Goodbye"
   end
 
+  test "active lists are on the home page" do
+    list = List.create(title: "Hello", active: true)
+
+    visit root_path
+
+    assert page.has_content?("Hello")
+  end
+
+  test "inactive lists appear on the hidden page" do
+    list = List.create(title: "Hello")
+    list.active = false
+    list.save
+
+    visit hidden_path
+
+    assert page.has_content?("Hello")
+  end
+
+  test "theres a link to the hidden page on the front page" do
+    visit root_path
+
+    click_link_or_button "Hidden lists!"
+
+    assert_equal hidden_path, current_path
+  end
+
+  test "theres a link to the active lists page on the hidden lists page" do
+    visit hidden_path
+
+    click_link_or_button "See Active Lists"
+
+    assert_equal root_path, current_path
+  end
+
+  test "an active link has an edit link" do
+    list = List.create(title: "Hello")
+
+    visit root_path
+    click_link_or_button "Edit"
+
+    assert_equal current_path, edit_list_path(list)
+  end
+
+  test "an active link has a details link" do
+    list = List.create(title: "Hello")
+
+    visit root_path
+    click_link_or_button "Details"
+
+    assert_equal current_path, list_path(list)
+  end
+
+  test "a hidden link has an edit link" do
+    list = List.create(title: "Hello")
+    list.active = false
+    list.save
+
+    visit hidden_path
+    click_link_or_button "Edit"
+
+    assert_equal current_path, edit_list_path(list)
+  end
+
+  test "a hidden link has a details link" do
+    list = List.create(title: "Hello")
+    list.active = false
+    list.save
+
+    visit hidden_path
+    click_link_or_button "Details"
+
+    assert_equal current_path, list_path(list)
+  end
+
+
 
 end

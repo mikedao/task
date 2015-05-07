@@ -1,10 +1,8 @@
-<h1>  BEHOLD, LIST OF LISTS </h1>
-<p> <%= link_to("Create A New List", new_list_path) %> </p>
-<p> <%= link_to("Hidden lists!", hidden_path) %> </p>
-
-<div class="active-lists">
+<h1>HIDDEN NINJA LISTS</h1>
+<p><%= link_to "See Active Lists", root_path %>
+<div class="inactive-lists">
   <p>
-  <b>Active Lists</b>
+  <b>Inactive Lists</b>
   </p>
   <table id="myTable" class="tablesorter">
     <thead>
@@ -14,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @active.each do |list| %>
+    <% @inactive.each do |list| %>
       <tr>
         <td><%= list.title %></td>
         <td><%= list.active %> </td>

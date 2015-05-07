@@ -2,6 +2,9 @@ class ListsController < ApplicationController
 
   def index
     @active = List.active
+  end
+
+  def hidden
     @inactive = List.inactive
   end
 

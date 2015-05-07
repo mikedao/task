@@ -21,6 +21,7 @@ group :development, :test do
   gem "pry"
   gem "better_errors"
   gem "web-console", "~> 2.0"
+  gem "database_cleaner"
 
   gem "spring"
 end

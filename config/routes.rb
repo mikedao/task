@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-root to: "lists#index"
+  root to: "lists#index"
+  get '/hidden/', to: 'lists#hidden', as: 'hidden'
   namespace :api do
     resources :todos
   end
