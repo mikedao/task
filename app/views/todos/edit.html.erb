@@ -11,6 +11,7 @@
   <%= f.label :due_date %>
   <%= f.date_field :due_date %>
   <%= f.hidden_field(:parent_id, value: params[:id]) %>
+  <%= f.hidden_field(:id, value: @todo.id) %>
   <%= f.check_box :active %>
   <%= f.label(:active, "Active") %>
 <%= f.label :avatar, "Upload PDF"%>
